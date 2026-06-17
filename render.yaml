@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: timeoff-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL          # paste your Supabase connection string
+        sync: false
+      - key: SUPABASE_URL          # https://PROJECT.supabase.co
+        sync: false
+      - key: SUPABASE_SERVICE_KEY  # service_role key (secret)
+        sync: false
+      - key: SUPABASE_BUCKET
+        value: attachments
+      - key: CORS_ORIGIN           # your front-end URL
+        sync: false
+      - key: JWT_SECRET            # auto-generated, kept secret
+        generateValue: true
+      - key: PW_SUFFIX
+        value: Akasia365mc
+      - key: EMAIL_DOMAIN
+        value: akasia365mc.com
+      - key: TOKEN_TTL
+        value: 8h
